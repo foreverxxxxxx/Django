@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1sp_a!cr%#i5c4t6ny3dj=@=o2v-&g9q)2b84_6_ujtt=!r(25'
+SECRET_KEY = 'django-insecure-hs7ipsm*=qgg^8*3@f2gp*23q(h72kx@2vg*$4t^9lkmkqa+!y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,15 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #'myapp.apps.MyappConfig',
-      'myapp',
+    # 'myapp.apps.MyappConfig',
+    'myapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-  
 ]
 
 MIDDLEWARE = [
@@ -57,7 +56,9 @@ ROOT_URLCONF = 'First.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / "templates" #We write to call index html
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -111,6 +112,7 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+
 
 USE_TZ = True
 

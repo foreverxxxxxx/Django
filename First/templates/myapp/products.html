@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block page_title %} 
+  {{category}}
+ {% endblock page_title %} 
+
+{% block content %}
+
+    <h1>{{category|title}}</h1>
+    {% comment %} <p>{{ now }}</p>
+    <p>{{now|date:"D d M Y"}}</p>
+    <p>{{now|date:"SHORT_DATE_FORMAT"}}</p>
+    <p>{{now|date:"D d M Y"}}{{ now|time:"H:i" }}</p> {% endcomment %}
+{% if products|length > 0 %} {% comment %}  {products.count >0 }It gives an error when I type {% endcomment %}
+      <div>
+        {% for product in products%}
+            {{product|title}}
+        {%endfor%}
+      </div>
+{%else %}
+    {% include "partials/_no_product.html" %}
+{%endif%}
+{% endblock  %}
+{% comment %} https://docs.djangoproject.com/en/5.0/ref/templates/builtins/ {% endcomment %}
+{% comment %} https://docs.djangoproject.com/en/5.0/ref/templates/builtins/ {% endcomment %}
