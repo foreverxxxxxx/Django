@@ -19,7 +19,7 @@ def index(request):
        list_items +=f"<li><a href=\"{redirect_path}\">{category}</a></li>"
    html=f"<ul>{list_items}</ul>"
    """
-   return render(request,'myapp/index.html',{
+   return render(request,'index.html',{
       "categories":categories
    })
  #  return HttpResponse(html)
@@ -49,7 +49,7 @@ def getProductsByCategory(request,category):
     # return HttpResponse(category_text)
      #return HttpResponse(f"<h1>{category_text}</h1>")
      #We can define a dictionary data structure as the second parameter
-    return render (request,'myapp/products.html',{ 
+    return render (request,'products.html',{ 
       "category" : category,
       "products": products,
       "now" : datetime.datetime.now()
