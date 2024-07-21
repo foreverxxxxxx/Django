@@ -9,13 +9,13 @@ class Product(models.Model):
    description=models.CharField(max_length=200)
    imageUrl=models.CharField(max_length=50)
    isActive=models.BooleanField(default=False)
-   category=models.CharField(max_length=5 ,null=True)
-   slug=models.SlugField(default="",null=False,db_index=True,unique=True)
+   category=models.CharField(max_length=8,null=True)
+   slug=models.SlugField(default="",blank=False,editable=False,null=False,db_index=True,unique=True)
 
    def save(self, *args,**kargs):
       self.slug= slugify(self.name)
       super().save(args, kargs)
 
    def __str__(self):
-     return f"{self.name}  {self.price}"
+     return f"{self.name}  {self.price} {self.slug}"
    
