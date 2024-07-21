@@ -5,16 +5,35 @@
 {% block css_files %}
 <link rel="stylesheet" href="{% static "css/style.css" %}">
 {% endblock  %}
+
 {% block page_title %}
 index.html
 {% endblock page_title %}
+
 {% block content %}
 <div class="container">
   <div class="row">
      <div class="col">
-    {% for c in categories %}
+    {% comment %} {% for c in categories %}
         <a class="btn btn-primary" href="{% url "products_by_category" category=c %}"> {{c}}</a>
-    {% endfor %}
+    {% endfor %} {% endcomment %}
+    <ul>
+    {%for product in products %}
+    {% if product.isActive %}
+    <li>
+     <a href={% url 'product_details' product.slug %} >
+     {{ product.name }}
+     </a>
+          - {{ product.price }}
+  </li>
+     {% endif %}
+   {% endfor %}
+    </ul>
+    <hr>
+            <p> {{ product_count }} adet ürün bulundu. </p>
+            <p> {{ price.avg_price }} TL ortalama fiyat hesaplandı. </p>
+            <p> {{ price.min_price}} TL min fiyat hesaplandı. </p>
+            <p> {{ price.max_price }} TL max fiyat hesaplandı. </p>
      </div>
   </div>
 </div>

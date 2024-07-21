@@ -1,8 +1,12 @@
-from django.http import HttpResponseNotFound, HttpResponseRedirect
+
+from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.http.response import HttpResponse
-from django.shortcuts import redirect,render
+from django.shortcuts import get_object_or_404, redirect,render
 from django.urls import reverse
 import datetime
+from .models import Product
+from django.db.models import Avg,Min,Max
+
 data ={
    "telefon":["samsung s20","samsung s21"],
    "bilgisayar":["monster","casper"],
@@ -10,18 +14,45 @@ data ={
    
 }
 def index(request):
+    products = Product.objects.all().order_by("-price")
+    product_count = Product.objects.filter(isActive=True).count()
+
+    price = Product.objects.filter(isActive=True).aggregate(
+        avg_price=Avg("price"),
+        min_price=Min("price"),
+        max_price=Max("price")
+    )
+
+
+    context ={ 
+      "products":products,
+      "product_count":product_count,
+      "price" : price
+   }
    # return HttpResponse("index") #We can connect to the database and return the product list
   # list_items =""
-   categories=list(data.keys())
-   """   
+  # categories=list(data.keys())
+    """   
    for category in category_list:
        redirect_path= reverse("products_by_category",args=[category])
        list_items +=f"<li><a href=\"{redirect_path}\">{category}</a></li>"
    html=f"<ul>{list_items}</ul>"
    """
-   return render(request,'index.html',{
-      "categories":categories
-   })
+    return render(request,'index.html',context) 
+
+
+def details(request,slug):
+#    try:
+#      product=Product.objects.get(pk=id)
+#    except:
+#       raise Http404
+
+   product=get_object_or_404(Product,slug= slug) 
+   context={
+      "product":product
+   }
+   return render(request,"details.html",context)
+   
  #  return HttpResponse(html)
        
 
