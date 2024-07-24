@@ -12,8 +12,12 @@ urlpatterns=[
    # path('list',views.list,name='list'),
    # path('telefon',views.telefon),
    # path('bilgisayar',views.bilgisayar),
-    path('<slug:slug>',views.details,name="product_details"),
-    path('<int:category_id>',views.getProductsByCategoryId),
-    path('<str:category>',views.getProductsByCategory,name='products_by_category') #The order of the url patterns is also important.
+    path('create', views.create),
+    path('edit/<int:id>', views.edit,name="product_edit"),
+    path('delete/<int:id>', views.delete,name="product_delete"),
+    path('list', views.list,name="product_list"),
+    path('<slug:slug>',views.details,name="product_details")
+    # path('<int:category_id>',views.getProductsByCategoryId),
+    # path('<str:category>',views.getProductsByCategory,name='products_by_category') #The order of the url patterns is also important.
   
 ]
